@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ResultSummaryItem({res}) {
+export default function ResultItem({res}) {
     return (
         <div className="result">
             <div className="resultHeader">

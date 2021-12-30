@@ -7,7 +7,7 @@
 .container {
   text-align: center;
   font-weight: 700;
-  color: #444;
+  color:#444;
 }
 
 #logoWrapper {
@@ -113,6 +113,11 @@
 }
 
 #showMore {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color:#444;
+  text-decoration: none;
   font-size: 1rem;
   text-align: center;
   margin-top: 1.5rem;
@@ -120,8 +125,16 @@
   cursor: pointer;
 }
 
-nav {
-  padding: 1.5rem;
+nav{
+  padding:1.5rem;
+}
+nav #searchForm {
+  display: inline;
+  margin-left: 3rem;
+}
+
+nav #searchInput{
+  width:50rem;
 }
 
 #navbarLogo {
@@ -132,25 +145,11 @@ nav {
   width: 8rem;
 }
 
-#navbarSearchFormWrapper {
-  display: inline;
-}
-
-#navbarSearchForm {
-  display: inline;
-  margin: 0 2rem;
-}
-
-#navbarSearchButton {
-  margin-top: 2rem;
-}
-
 #resultsMain {
   display: block;
   margin: 5rem auto;
   font-weight: 700;
-  color: #444;
-  width: 60%;
+  width: 75%;
 }
 
 #resultsMain .result {
@@ -171,7 +170,11 @@ nav {
 }
 
 #resultsMain .resultEmail {
-  margin-right: 10rem;
+  margin-right: 8.5rem;
+}
+
+#noResult{
+  margin:5rem 12.5rem;
 }
 
 .fas {
@@ -204,6 +207,7 @@ nav {
   align-self: flex-end;
   margin-left: auto;
   list-style-type: none;
+  background-color: #fff;
   border: 1px solid #333;
   border-radius: 4px;
   padding: 0.5rem;
@@ -224,10 +228,6 @@ nav {
 }
 
 @media only screen and (max-width: 1199px) {
-  .searchInput,
-  #resultSummary {
-    width: 35rem;
-  }
 
   #logoWrapper {
     width: 40%;
@@ -236,45 +236,66 @@ nav {
   #logoParagraph {
     font-size: 0.9rem;
   }
+  nav #searchInput{
+    width:40rem;
+  }
+
 }
 
 @media only screen and (max-width: 991px) {
-  .searchInput,
+  #searchInput,
   #resultSummary {
-    width: 23rem;
+    width: 30rem;
   }
 
   #resultsMain {
     width: 70%;
   }
+
+  nav #searchInput{
+    width:27rem;
+  }
+
+  .resultLocation,
+  .resultEmail,
+  #logoParagraph, #orderByText, .listGroup{
+    font-size: 0.85rem;
+  }
+
+  #orderBy{
+    width:1rem;
+  }
+
+  #resultsMain .resultEmail{
+    margin-right: 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-  #navbarSearchFormWrapper {
+  nav #searchForm {
     display: block;
     text-align: center;
     margin-top: 3rem;
+  }
+
+  nav #searchInput{
+    width:20rem;
+  }
+
+  #searchInput,
+  #resultSummary {
+    width: 25rem;
   }
 
   #resultsMain {
     width: 80%;
   }
 
-  .resultLocation,
-  .resultEmail,
-  #logoParagraph {
-    font-size: 0.85rem;
+  #resultsMain .resultEmail{
+    margin-right: 0rem;
+    text-align: end;
   }
 
-  #navbarSearchForm {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #navbarSearchButton {
-    margin-left: 0.5rem;
-  }
 
   #logoWrapper {
     width: 50%;
@@ -286,23 +307,35 @@ nav {
 }
 
 @media only screen and (max-width: 575px) {
-  .searchInput,
+  #searchInput,
   #resultSummary {
-    width: 15rem;
+    width: 18rem;
+  }
+
+  nav #searchInput{
+    width:15rem;
   }
 
   #resultsMain {
     width: 90%;
   }
 
+  #resultsMain .resultEmail{
+    margin-right: 0;
+  }
+
   .resultLocation,
   .resultEmail,
-  #logoParagraph {
+  #logoParagraph, #orderByText, .listGroup {
     font-size: 0.75rem;
   }
 
   #logoParagraph {
     font-size: 0.6rem;
+  }
+
+  #orderBy{
+    width:0.75rem;
   }
 
   .btn-outline {

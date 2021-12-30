@@ -1,67 +1,43 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import OrderBy from "../img/orderby.png";
+import { useDataState } from "../context/data";
+import ResultItem from "./ResultItem";
+import ListGroup from './ListGroup';
 
 export default function Results() {
+
   const [isVisible, setIsVisible] = useState(false);
-  
+
+  const state = useDataState();
+  const searchResult = state && state.searchResult;
+
   return (
     <div>
       <Navbar />
-      <div id="resultsMain">
+      {searchResult ? <div id="resultsMain">
         <div id="orderByWrapper" onMouseLeave={(e) => setIsVisible(false)}>
-          <img src={OrderBy} alt="orderBy" id="orderBy" onMouseOver={(e) => setIsVisible(true) }/>
-          <span id="orderByText" onMouseOver={(e) => setIsVisible(true)} >Order By</span>
-          {isVisible ? <div id="listGroupWrapper">
-            <ul className="listGroup" onMouseLeave={(e) => setIsVisible(false)}>
-              <li className="listGroupItem">Name ascending</li>
-              <li className="listGroupItem">Name descending</li>
-              <li className="listGroupItem">Year ascending</li>
-              <li className="listGroupItem">Year descending</li>
-            </ul>
-          </div> : ""}
-          
-        </div>
 
-        <div className="result">
-          <div className="resultHeader">
-            <h5 className="resultLocation">Turkey - İstanbul</h5>
-            <h5 className="resultEmail">Email: abc@xyz.com</h5>
-          </div>
-          <small className="resultPerson">Jane Doe - 2016</small>
-        </div>
+          <img
+            src={OrderBy}
+            alt="orderBy"
+            id="orderBy"
+            onMouseOver={(e) => setIsVisible(true)}
+          />
 
-        <div className="result">
-          <div className="resultHeader">
-            <h5 className="resultLocation">Turkey - İstanbul</h5>
-            <h5 className="resultEmail">Email: abc@xyz.com</h5>
-          </div>
-          <small className="resultPerson">Jane Doe - 2016</small>
-        </div>
+          <span id="orderByText" onMouseOver={(e) => setIsVisible(true)}>
+            Order By
+          </span>
 
-        <div className="result">
-          <div className="resultHeader">
-            <h5 className="resultLocation">Turkey - İstanbul</h5>
-            <h5 className="resultEmail">Email: abc@xyz.com</h5>
-          </div>
-          <small className="resultPerson">Jane Doe - 2016</small>
-        </div>
+          {isVisible && <ListGroup setIsVisible={setIsVisible}/>}
 
-        <div className="result">
-          <div className="resultHeader">
-            <h5 className="resultLocation">Turkey - İstanbul</h5>
-            <h5 className="resultEmail">Email: abc@xyz.com</h5>
-          </div>
-          <small className="resultPerson">Jane Doe - 2016</small>
         </div>
-
-        <div className="result">
-          <div className="resultHeader">
-            <h5 className="resultLocation">Turkey - İstanbul</h5>
-            <h5 className="resultEmail">Email: abc@xyz.com</h5>
-          </div>
-          <small className="resultPerson">Jane Doe - 2016</small>
-        </div>
+        
+        {searchResult &&
+          searchResult.map(
+            (res, index) =>
+              <ResultItem key={index} res={res} />
+          )}
 
         <div className="btnWrapper">
           <button type="button" className="btn btn-outline">
@@ -86,7 +62,7 @@ export default function Results() {
             Next
           </button>
         </div>
-      </div>
+      </div> : (<h4 id="noResult">Looks like you did not search anything.</h4>)}
     </div>
   );
 }

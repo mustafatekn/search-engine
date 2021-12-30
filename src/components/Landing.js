@@ -2,40 +2,27 @@ import React, { useEffect, useState } from "react";
 import Logo from "../img/logo.png";
 import axios from "axios";
 import SearchForm from "./SearchForm";
-import ResultSummaryItem from "./ResultSummaryItem";
+import ResultItem from "./ResultItem";
+import { useDataDispatch } from "../context/data";
+import { Link } from "react-router-dom";
 
 export default function Landing() {
   const [data, setData] = useState([]);
-  const [searchString, setSearchString] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  
+  const dispatch = useDataDispatch();
 
   const getResults = () => {
     axios
       .get("http://localhost:3000/data")
       .then((res) => {
+        dispatch({type:'SET_DATA', payload: res.data});
         setData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const search = (e) => {
-    e.preventDefault();
-    if (searchString.toLowerCase().trim() === "") throw Error("Search string cannot be empty");
-
-    const items = [];
-
-    data.map((item) => {
-      if (item[0].toLowerCase().includes(searchString) || item[1].toLowerCase().includes(searchString)) items.push(item);
-    });
-    setSearchResult(items);
-    clearInputs();
-  };
-
-  const clearInputs = () => {
-    document.getElementById("searchInput").value = "";
-    setSearchString("");
+      
   };
 
   useEffect(() => {
@@ -50,13 +37,13 @@ export default function Landing() {
       </div>
 
       <div id="landingContainer">
-        <SearchForm search={search} setSearchString={setSearchString} />
+        <SearchForm setSearchResult={setSearchResult}/>
         {searchResult.length > 0 && (
           <div id="resultSummary">
             {searchResult && searchResult.map((res, index) => (
-                index < 3 && <ResultSummaryItem key={index} res={res} />
+                index < 3 && <ResultItem key={index} res={res} />
               ))}
-            {searchResult.length > 3 && <p id="showMore">Show more...</p>}
+            {searchResult.length > 3 && <Link to="/results" id="showMore">Show more...</Link>}
           </div>
         )}
       </div>
