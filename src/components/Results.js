@@ -8,8 +8,8 @@ export default function Results() {
   return (
     <div>
       <Navbar />
-      <div id="resultsMain" onMouseLeave={(e) => setIsVisible(false)}>
-        <div id="orderByWrapper">
+      <div id="resultsMain">
+        <div id="orderByWrapper" onMouseLeave={(e) => setIsVisible(false)}>
           <img src={OrderBy} alt="orderBy" id="orderBy" onMouseOver={(e) => setIsVisible(true) }/>
           <span id="orderByText" onMouseOver={(e) => setIsVisible(true)} >Order By</span>
           {isVisible ? <div id="listGroupWrapper">

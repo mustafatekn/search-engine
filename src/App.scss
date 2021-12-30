@@ -48,7 +48,7 @@
   margin-left: auto;
 }
 
-.searchInput {
+#searchInput {
   padding: 0.5rem;
   border: 1px solid #666;
   border-radius: 6px;
@@ -70,6 +70,7 @@
   background-color: #00447b;
   border: 1px solid #00447b;
   margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 .btn-outline {
@@ -223,27 +224,28 @@ nav {
 }
 
 @media only screen and (max-width: 1199px) {
-  .searchInput, #resultSummary {
+  .searchInput,
+  #resultSummary {
     width: 35rem;
   }
 
-  #logoWrapper{
+  #logoWrapper {
     width: 40%;
   }
 
-  #logoParagraph{
+  #logoParagraph {
     font-size: 0.9rem;
   }
-
 }
 
 @media only screen and (max-width: 991px) {
-  .searchInput, #resultSummary {
+  .searchInput,
+  #resultSummary {
     width: 23rem;
   }
 
-  #resultsMain{
-    width:70%;
+  #resultsMain {
+    width: 70%;
   }
 }
 
@@ -254,11 +256,13 @@ nav {
     margin-top: 3rem;
   }
 
-  #resultsMain{
+  #resultsMain {
     width: 80%;
   }
 
-  .resultLocation, .resultEmail, #logoParagraph{
+  .resultLocation,
+  .resultEmail,
+  #logoParagraph {
     font-size: 0.85rem;
   }
 
@@ -272,34 +276,36 @@ nav {
     margin-left: 0.5rem;
   }
 
-  #logoWrapper{
+  #logoWrapper {
     width: 50%;
   }
-  
-  #logoParagraph{
+
+  #logoParagraph {
     font-size: 0.75rem;
   }
 }
 
 @media only screen and (max-width: 575px) {
-  .searchInput, #resultSummary {
-    width:15rem;
+  .searchInput,
+  #resultSummary {
+    width: 15rem;
   }
 
-  #resultsMain{
+  #resultsMain {
     width: 90%;
   }
 
-  .resultLocation, .resultEmail, #logoParagraph{
+  .resultLocation,
+  .resultEmail,
+  #logoParagraph {
     font-size: 0.75rem;
   }
 
-
-  #logoParagraph{
+  #logoParagraph {
     font-size: 0.6rem;
   }
 
-  .btn-outline{
+  .btn-outline {
     margin-bottom: 1rem;
   }
 }
