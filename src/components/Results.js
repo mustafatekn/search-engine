@@ -19,7 +19,8 @@ export default function Results() {
     <div>
       <Navbar />
       {!isLoading ? (
-        searchResults && searchResults.length > 0 ? (
+        searchResults &&
+        searchResults.length > 0 && (
           <div id="resultsMain">
             <div id="orderByWrapper" onMouseLeave={(e) => setIsVisible(false)}>
               <img
@@ -65,8 +66,6 @@ export default function Results() {
               </button>
             </div>
           </div>
-        ) : (
-          <h4 id="noResult">Search something.</h4>
         )
       ) : (
         <p id="noResult">Loading...</p>
