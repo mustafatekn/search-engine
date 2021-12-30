@@ -5,6 +5,7 @@ import { useSearchState } from "../context/search";
 import { useUIState } from "../context/ui";
 import ResultItem from "./ResultItem";
 import ListGroup from "./ListGroup";
+import Pagination from "./Pagination";
 
 export default function Results() {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,12 +16,20 @@ export default function Results() {
   const uiState = useUIState();
   const isLoading = uiState && uiState.loading;
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [resultsPerPage, setResultsPerPage] = useState(10);
+
+  const indexOfLastResult = currentPage * resultsPerPage;
+  const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+  const currentResults = searchResults && searchResults.slice(indexOfFirstResult, indexOfLastResult);
+  const totalResults = searchResults && searchResults.length;
+
   return (
     <div>
       <Navbar />
       {!isLoading ? (
-        searchResults &&
-        searchResults.length > 0 && (
+        currentResults &&
+        currentResults.length > 0 && (
           <div id="resultsMain">
             <div id="orderByWrapper" onMouseLeave={(e) => setIsVisible(false)}>
               <img
@@ -37,34 +46,12 @@ export default function Results() {
               {isVisible && <ListGroup setIsVisible={setIsVisible} />}
             </div>
 
-            {searchResults &&
-              searchResults.map((res, index) => (
+            {currentResults &&
+              currentResults.map((res, index) => (
                 <ResultItem key={index} res={res} />
               ))}
 
-            <div className="btnWrapper">
-              <button type="button" className="btn btn-outline">
-                Previous
-              </button>
-              <button type="button" className="btn btn-outline">
-                1
-              </button>
-              <button type="button" className="btn btn-outline">
-                2
-              </button>
-              <button type="button" className="btn btn-outline">
-                3
-              </button>
-              <button type="button" className="btn btn-outline">
-                4
-              </button>
-              <button type="button" className="btn btn-outline">
-                5
-              </button>
-              <button type="button" className="btn btn-outline">
-                Next
-              </button>
-            </div>
+            <Pagination setCurrentPage={setCurrentPage} resultsPerPage={resultsPerPage} totalResults={totalResults} currentPage={currentPage}/>
           </div>
         )
       ) : (

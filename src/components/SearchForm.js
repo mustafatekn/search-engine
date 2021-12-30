@@ -69,7 +69,7 @@ export default function SearchForm() {
         Search
       </button>
       {error && (
-        <div style={{ color: "red", fontSize: "0.75rem", marginTop: "0.5rem" }}>
+        <div id="errorText" style={{ color: "red", fontSize: "0.75rem", marginTop: "0.5rem" }}>
           {error}
         </div>
       )}
