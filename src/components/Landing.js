@@ -1,50 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Logo from "../img/logo.png";
-import axios from "axios";
 import SearchForm from "./SearchForm";
 import ResultItem from "./ResultItem";
-import { useDataDispatch } from "../context/data";
+import { useSearchState } from "../context/search";
+import { useUIState } from "../context/ui";
 import { Link } from "react-router-dom";
 
 export default function Landing() {
-  const [data, setData] = useState([]);
-  const [searchResult, setSearchResult] = useState([]);
-  
-  const dispatch = useDataDispatch();
+  const searchState = useSearchState();
+  const searchResults = searchState && searchState.searchResults;
 
-  const getResults = () => {
-    axios
-      .get("http://localhost:3000/data")
-      .then((res) => {
-        dispatch({type:'SET_DATA', payload: res.data});
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-      
-  };
-
-  useEffect(() => {
-    getResults();
-  }, []);
+  const uiState = useUIState();
+  const isLoading = uiState && uiState.loading;
 
   return (
-    <div className="container">
+    <div className="text-center">
       <div id="logoWrapper">
         <img src={Logo} id="logo" alt="logo" />
         <p id="logoParagraph">Search web app</p>
       </div>
 
       <div id="landingContainer">
-        <SearchForm setSearchResult={setSearchResult}/>
-        {searchResult.length > 0 && (
-          <div id="resultSummary">
-            {searchResult && searchResult.map((res, index) => (
-                index < 3 && <ResultItem key={index} res={res} />
-              ))}
-            {searchResult.length > 3 && <Link to="/results" id="showMore">Show more...</Link>}
-          </div>
+        <SearchForm />
+        {!isLoading ? (
+          searchResults &&
+          searchResults.length > 0 && (
+            <div id="resultSummary">
+              {searchResults.map(
+                (res, index) =>
+                  index < 3 && <ResultItem key={index} res={res} />
+              )}
+              {searchResults.length > 3 && (
+                <Link to="/results" id="showMore">
+                  Show more...
+                </Link>
+              )}
+            </div>
+          )
+        ) : (
+          <p style={{ marginTop: "2rem" }}>Loading...</p>
         )}
       </div>
     </div>

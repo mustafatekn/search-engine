@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 
 export default function ListGroup({setIsVisible}) {
 
   return (
     <div id="listGroupWrapper">
-      <ul className="listGroup" onMouseLeave={(e) => setIsVisible(false)}>
+      <ul className="listGroup" onMouseLeave={() => setIsVisible(false)}>
         <li className="listGroupItem">Name ascending</li>
         <li className="listGroupItem">Name descending</li>
         <li className="listGroupItem">Year ascending</li>
