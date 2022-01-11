@@ -31,7 +31,7 @@ export default function SearchForm() {
           if (
             item[0].toLowerCase().includes(searchString.toLowerCase()) ||
             item[1].toLowerCase().includes(searchString.toLowerCase()) ||
-            item[4].toLowerCase().includes(searchString.toLowerCase)
+            item[4].toLowerCase().includes(searchString.toLowerCase())
           )
             items.push(item);
         });
